@@ -5,3 +5,8 @@ https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 Errors:
 apiVersion: v1
 Error from server (BadRequest): error when creating "replica-sets/rs-defenition.yml": ReplicaSet in version "v1" cannot be handled as a ReplicaSet: strict decoding error: unknown field "replicas", unknown field "selector"
+
+ # Scale a replica set named 'foo' to 3
+  kubectl scale --replicas=3 rs/foo
+
+  kubectl edit rs foo
