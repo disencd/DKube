@@ -1,0 +1,18 @@
+What are service accounts? 
+A service account is a type of non-human account that, in Kubernetes, provides a distinct identity in a Kubernetes cluster. Application Pods, system components, and entities inside and outside the cluster can use a specific ServiceAccount's credentials to identify as that ServiceAccount. This identity is useful in various situations, including authenticating to the API server or implementing identity-based security policies.
+
+Cannot edit service account
+
+controlplane ~ ✖ kubectl get serviceaccounts
+NAME      SECRETS   AGE
+default   0         6m40s
+dev       0         36s
+
+controlplane ~ ➜  kubectl create serviceaccount dashboard-sa
+serviceaccount/dashboard-sa created
+
+controlplane ~ ➜  kubectl create token dashboard-sa
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImNqQVFPd0I3VHJFMWVPWVVPeGt1NWlqcmV1dEUxQ1dDaGI1LTVrdjBWV1EifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiLCJrM3MiXSwiZXhwIjoxNzQ2MDMwOTgzLCJpYXQiOjE3NDYwMjczODMsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiYzhiNzNlNjEtN2UyNy00MzgzLWI2NjgtMjJmYzk4OGQ2YjJiIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0Iiwic2VydmljZWFjY291bnQiOnsibmFtZSI6ImRhc2hib2FyZC1zYSIsInVpZCI6ImI3YzVhODg4LTkxNWMtNGU1My05ZGZkLTllNDhlMzIzYTJiNiJ9fSwibmJmIjoxNzQ2MDI3MzgzLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDpkYXNoYm9hcmQtc2EifQ.KAWXuhlC45sQ2gewtkm7_I36rZfXmEGEKjhMOpauH1Uw76uYD9fbgZYj46pNB3KutgmREE_e8x5Bsr2Szsm4Z1bZJDN8gqhF3Q7sDX3FrxWAUKkRjk5CNdggVOsE5mgnZ9bnJ4Y_Z8XNApfCKUFMDuttfMuSOxWqNvyCpyQB3vwScLaHxPyWQqbxFy9Ay2kbagZNDa27liidx3UBCem1B-FaPEY9VKq9j1EB_vjeaLKlgL6uPPGcj4eG1TzMWjmMXWbG11N8ujB8yhUaIF9NsZIqOeC8g87vHclWjKV-pROPkZNm_cqVX6_s5oj_sNcZaEJ5uL-sZBbZw5nAXDuEzw
+
+
+kubectl set serviceaccount deploy/web-dashboard dashboard-sa
