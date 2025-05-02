@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In
+            values:
+            - large
+            - medium
+          - key: size
+            operator: NotIn
+            values:
+            - small         
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
