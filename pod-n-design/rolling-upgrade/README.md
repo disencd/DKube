@@ -156,3 +156,32 @@ With --to-revision=1, it will be rolled back with the first image we used to cre
 
 controlplane $ kubectl describe deployments. nginx | grep -i image:
 Image: nginx:1.16
+
+
+
+controlplane ~ ➜  k get all
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/frontend-6765b99794-8srtt   1/1     Running   0          24s
+pod/frontend-6765b99794-lklwg   1/1     Running   0          24s
+pod/frontend-6765b99794-pvpmd   1/1     Running   0          24s
+pod/frontend-6765b99794-vrl9r   1/1     Running   0          24s
+
+NAME                     TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
+service/kubernetes       ClusterIP   10.43.0.1    <none>        443/TCP          4m45s
+service/webapp-service   NodePort    10.43.9.88   <none>        8080:30080/TCP   24s
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/frontend   4/4     4            4           24s
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/frontend-6765b99794   4         4         4       24s
+
+controlplane ~ ➜  k get deployments
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+frontend   4/4     4            4           54s
+
+
+for i in {1..35}; do
+   kubectl exec --namespace=kube-public curl -- sh -c 'test=`wget -qO- -T 2  http://webapp-service.default.svc.cluster.local:8080/info 2>&1` && echo "$test OK" || echo "Failed"';
+   echo ""
+done
