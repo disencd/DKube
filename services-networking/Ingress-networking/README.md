@@ -35,3 +35,26 @@ app-space   ingress-wear-watch   <none>   *       172.20.119.53   80      8m38s
 controlplane ~ ➜  kubectl get svc -n critical-space
 NAME          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 pay-service   ClusterIP   172.20.212.108   <none>        8282/TCP   2m20s
+
+
+Ingress Networking
+
+controlplane ~ ✖ kubectl create namespace ingress-nginx
+namespace/ingress-nginx created
+
+The NGINX Ingress Controller requires a ConfigMap object. Create a ConfigMap object with name ingress-nginx-controller in the ingress-nginx namespace.
+
+controlplane ~ ➜  kubectl create configmap ingress-nginx-controller -n ingress-nginx
+configmap/ingress-nginx-controller created
+
+
+The NGINX Ingress Controller requires two ServiceAccounts. Create both ServiceAccount with name ingress-nginx and ingress-nginx-admission in the ingress-nginx namespace.
+
+
+Use the spec provided below.
+
+controlplane ~ ➜  kubectl create serviceaccount ingress-nginx -n ingress-nginx
+serviceaccount/ingress-nginx created
+
+controlplane ~ ➜  kubectl create serviceaccount ingress-nginx-admission -n ingress-nginx
+serviceaccount/ingress-nginx-admission created
