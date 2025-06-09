@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersisitentVolume
+metadata:
+  name: Pod-Vol1
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  Capaciry:
+    storage: 1Gi
+  awsElasticBlockStore:
+    volumeID: 12121212121
+    fsType: ext4
