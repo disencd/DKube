@@ -3,9 +3,9 @@ kind: RoleBinding
 metadata:
   name: develuser-developer-RoleBinding
 subjects:
-  kind: User
-  name: dev-User
-  apiGroup: rbac.authorization.k8s.io
+  - kind: User
+    name: dev-User
+    apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
   name: developer
