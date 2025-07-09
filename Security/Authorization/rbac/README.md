@@ -27,3 +27,6 @@ No resources found in default namespace.
 ▶ k auth can-i create deployments
 yes
 
+➜  DKube git:(main) k --as dev-user get pods
+Error from server (Forbidden): pods is forbidden: User "dev-user" cannot list resource "pods" in API group "" in the namespace "default"
+➜  DKube git:(main) 
